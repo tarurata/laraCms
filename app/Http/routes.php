@@ -1,7 +1,9 @@
 <?php
 
+use App\Photo; 
 use App\Post;
 use App\User;
+use App\Country;
 
 /*
 |--------------------------------------------------------------------------
@@ -226,3 +228,59 @@ Route::get('/posts', function(){
     }
 
 });
+
+Route::get('/user/{id}/role', function($id){
+
+    $user = User::find($id)->roles()->orderBy('id', 'desc')->get();
+
+    return $user;
+    //foreach($user->roles as $role) {
+        //return $role->name;
+    //}
+
+});
+
+// Accessing the intermediate table / pivot table
+
+//Route::get('/user/pivot', function (){
+    //$user = User::find(1);
+    //foreach($user->roles as $role) {
+        //return $role->pivot->created_at;
+    //}
+//});
+
+//Route::get('/user/country', function(){
+
+    //$country = Country::find(2); 
+    //foreach($country->posts as $post){
+        //return $post->title;
+
+    //};
+//});
+
+
+// Polymorphic Relations
+//Route::get('post/photos', function() {
+
+    //$post = post::find(1);
+    //foreach($post->photos as $photo) {
+
+        //echo $photo->path . "<br>";
+
+    //}
+
+//});
+
+Route::get('photo/{id}/post', function($id){
+
+    $photo = Photo::findOrFail($id);
+    
+    return $photo->imageable;
+
+
+});
+
+
+
+
+
