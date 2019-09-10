@@ -37,7 +37,7 @@ class Post extends Model
 
     public function tags() {
 
-        return $this->morpToMany('App\Tag', 'taggable');
+        return $this->morphToMany('App\Tag', 'taggable');
 
     }
 }

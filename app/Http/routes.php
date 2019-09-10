@@ -1,5 +1,6 @@
 <?php
 
+use App\Tag; 
 use App\Photo; 
 use App\Post;
 use App\User;
@@ -271,16 +272,33 @@ Route::get('/user/{id}/role', function($id){
 
 //});
 
-Route::get('photo/{id}/post', function($id){
+//Route::get('photo/{id}/post', function($id){
 
-    $photo = Photo::findOrFail($id);
+    //$photo = Photo::findOrFail($id);
     
-    return $photo->imageable;
+    //return $photo->imageable;
 
+
+//});
+
+Route::get('post/tag', function(){
+
+    $post = Post::find(1);
+
+    foreach($post->tags as $tag) {
+        echo $tag->name;
+    }
 
 });
 
 
+Route::get('/tag/post', function(){
 
+    $tag = Tag::find(2);
 
+    foreach($tag->posts as $post) {
+        return  $post->title;
+    }
+
+});
 
